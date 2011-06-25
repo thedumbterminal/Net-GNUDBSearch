@@ -12,7 +12,8 @@ my $build = Module::Build->new(
 		'WWW::Mechanize' => undef,
 		'Carp' => undef,
 		'URI::Encode' => undef,
-		'XML::Simple' => undef
+		'XML::Simple' => undef,
+		'Net::FreeDB2' => undef
 	},
 	create_makefile_pl => 'traditional'
 );

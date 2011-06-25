@@ -27,11 +27,11 @@ sub byArtistAlbum{
 sub byArtist{
 	my($self, $query) = @_;
 	my @results = ();
+	my $class = ref($self);
 	if($query){
 		$self->__setAction("artist");
 		my $url = $self->__getSearchUrl();
-		my $uri = URI::Encode->new();
-        my $encoded = $uri->encode($query);
+        my $encoded = $class->__encode($query);
         $url .=  "/"  . $encoded;	#add search terms
 		my $mech = WWW::Mechanize->new();
 		print "Getting url: $url\n";
@@ -40,28 +40,32 @@ sub byArtist{
 			my $content = $mech->content();
 			if($content =~ m/<h2>Search Results, \d+ albums found:<\/h2>.+<br><br>(.+<hr size="1">)/s){
 				my $results = $1;
-				my $class = ref($self);
 				my $xml = $class->__htmlToXml($results);
 				my $xs = XML::Simple->new();
     			my $ref = $xs->XMLin($xml);
 				foreach my $match (@{$ref->{'match'}}){
+					#print Dumper $match;
 					my $a = $match->{'a'}[0];
+					#get the album and artist
 					my $name = $a->{'b'};
-					my $cdUrl = $a->{'href'};
 					my($cdArtist, $cdAlbum) = split(" / ", $name);
-					if($cdUrl =~ m/([a-z0-9]+)$/){
-						my $cdId = $1;
+					#get data for the track lookup
+					$a = $match->{'a'}[1];
+					if($a->{'content'} =~ m/^Discid: (\w+) \/ ([a-f0-9]+)$/){
+						my $cdGenre = $1;
+						my $cdId = $2;
 						my $objClass = $class . "::Cd";	#avoid hard coding classes
 						my $config = {
 							"id" => $cdId,
 							"artist" => $cdArtist,
-							"album" => $cdAlbum
+							"album" => $cdAlbum,
+							"genre" => $cdGenre
 						}; 
 						my $cdObj = $objClass->new($config);
 						push(@results, $cdObj);	#save it in the results
 					}
 					else{
-						confess("Invalid CD URL");
+						confess("Invalid GNUDB info");
 					}
 				}
 			}
@@ -122,6 +126,14 @@ sub __htmlToXml{
 	$xml =~ s/&/&amp;/g;
 	$xml = "<matches>" . $xml . "</matches>\n";
 	return $xml;
+}
+#########################################################
+sub __encode{
+	my($class, $query) = @_;
+	my $uri = URI::Encode->new();
+    my $encoded = $uri->encode($query);
+    $encoded =~ s/%20/\+/g;	#the gnudb search does a redirect if + signs are not used
+	return $encoded;
 }
 #########################################################
 return 1;
