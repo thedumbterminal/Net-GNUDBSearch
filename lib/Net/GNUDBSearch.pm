@@ -1,4 +1,11 @@
 package Net::GNUDBSearch;
+
+=pod
+
+We only get the first page of results as that should be good enough to find data.
+
+=cut
+
 use warnings;
 use strict;
 use Carp;

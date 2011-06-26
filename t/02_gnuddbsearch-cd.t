@@ -4,7 +4,7 @@ use Test::More;
 use Data::Dumper;
 use lib qw(lib ../lib);
 use Net::GNUDBSearch::Cd;
-plan(tests => 2);
+plan(tests => 6);
 
 my $config = {
 	"id" => "b512560d",
@@ -16,9 +16,21 @@ my $cd = Net::GNUDBSearch::Cd->new($config);
 #1
 isa_ok($cd, "Net::GNUDBSearch::Cd");
 
+#2
+is($cd->getArtist(), $config->{'artist'}, "getArtist()");
+
+#3
+is($cd->getAlbum(), $config->{'album'}, "getAlbum()");
+
+#4
+is($cd->getGenre(), $config->{'genre'}, "getGenre()");
+
+#5
+is($cd->getId(), $config->{'id'}, "getId()");
+
 my @tracks = $cd->getTracks();
 #print Dumper \@tracks;
-#2
+#6
 is($#tracks, 12, "getTracks()");
 
 #get the tracks again to check for caching
