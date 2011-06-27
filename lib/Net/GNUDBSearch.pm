@@ -76,9 +76,6 @@ sub byArtist{
 					}
 				}
 			}
-			else{
-				print "No match found\n";
-			}
 		}
 		else{
 			confess("Problem with search, code: " . $mech->status());
