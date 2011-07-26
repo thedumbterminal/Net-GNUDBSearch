@@ -56,6 +56,10 @@ sub byArtist{
 					#get the album and artist
 					my $name = $a->{'b'};
 					my($cdArtist, $cdAlbum) = split(" / ", $name);
+					$cdArtist =~ s/^\s+//g; #remove leading whitespace
+					$cdArtist =~ s/\s+$//g; #remove trailing whitespace
+					$cdAlbum =~ s/^\s+//g;  #remove leading whitespace
+					$cdAlbum =~ s/\s+$//g;  #remove trailing whitespace
 					#get data for the track lookup
 					$a = $match->{'a'}[1];
 					if($a->{'content'} =~ m/^Discid: (\w+) \/ ([a-f0-9]+)$/){
