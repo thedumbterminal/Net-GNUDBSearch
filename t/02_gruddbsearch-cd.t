@@ -7,9 +7,9 @@ use Net::GNUDBSearch::Cd;
 plan(tests => 6);
 
 my $config = {
-	"id" => "b512560d",
+	"id" => "cf11080f",
 	"artist" => "The Prodigy",
-	"album" => "(More) Music For The Jilted Generation",
+	"album" => "-Their Law- The Singles 1990-2005",
 	"genre" => "blues"
 };
 my $cd = Net::GNUDBSearch::Cd->new($config);
@@ -29,9 +29,8 @@ is($cd->getGenre(), $config->{'genre'}, "getGenre()");
 is($cd->getId(), $config->{'id'}, "getId()");
 
 my @tracks = $cd->getTracks();
-#print Dumper \@tracks;
 #6
-is($#tracks, 12, "getTracks()");
+is($#tracks, 14, "getTracks()");
 
 #get the tracks again to check for caching
 @tracks = $cd->getTracks();

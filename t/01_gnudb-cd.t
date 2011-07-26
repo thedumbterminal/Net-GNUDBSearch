@@ -7,7 +7,7 @@ use Net::GNUDB::Cd;
 plan(tests => 4);
 
 my $config = {
-	"id" => "b512560d",
+	"id" => "cf11080f",
 	"genre" => "blues"
 };
 my $cd = Net::GNUDB::Cd->new($config);
@@ -23,7 +23,7 @@ is($cd->getId(), $config->{'id'}, "getId()");
 my @tracks = $cd->getTracks();
 #print Dumper \@tracks;
 #4
-is($#tracks, 12, "getTracks()");
+is($#tracks, 14, "getTracks()");
 
 #get the tracks again to check for caching
 @tracks = $cd->getTracks();
