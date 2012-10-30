@@ -2,7 +2,22 @@ package Net::GNUDBSearch;
 
 =pod
 
-We only get the first page of results as that should be good enough to find data.
+=head1 NAME
+
+Net::GNUDBSearch - Search interface to GNUDB database
+
+=head1 SYNOPSIS
+
+	use Net::GNUDBSearch;
+	my $search = Net::GNUDBSearch->new();
+	my $results = $search->byArtist("The Prodigy");
+
+=head1 DESCRIPTION
+
+Net::GNUDBSearch is an interface to the website www.gnudb.org online free CD information database. Based on Net::CDDBSearch by Vitaliy Babiy. This module
+allows you to search by artist and retrive a list of albums found then get their tracks.
+
+=head1 METHODS
 
 =cut
 
@@ -24,11 +39,6 @@ sub new{
 	};
 	bless $self, $class;
 	return $self;
-}
-##########################################################
-sub byArtistAlbum{
-	my @results;
-	return \@results;
 }
 ##########################################################
 sub byArtist{
@@ -90,11 +100,6 @@ sub byArtist{
 	}
 	return \@results;	
 }
-##########################################################
-sub byAlbum{
-	my @results;
-	return \@results;	
-}
 #########################################################
 sub __getSearchUrl{
 	my$self = shift;
@@ -143,5 +148,35 @@ sub __encode{
     $encoded =~ s/%20/\+/g;	#the gnudb search does a redirect if + signs are not used
 	return $encoded;
 }
+#########################################################
+
+=pod
+
+=head1 Notes
+
+Only retrieves the first page of results as that should be good enough to find data.
+
+=head1 Author
+
+MacGyveR <dumb@cpan.org>
+
+Development questions, bug reports, and patches are welcome to the above address.
+
+=head1 Thanks
+
+Vitaliy Babiy <admin@mpscope.net> for module Net::CDDBSearch
+
+=head1 Copyright
+
+Copyright (c) 2012 MacGyveR. All rights reserved.
+
+This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+
+=head1 See Also
+
+Net::CDDBSearch
+
+=cut
+
 #########################################################
 return 1;

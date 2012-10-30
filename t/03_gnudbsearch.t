@@ -24,5 +24,3 @@ my $results = $search->byArtist("The Prodigy");
 	#2
 	ok($ok, "All results are of the correct class");
 }
-#@results = $search->byAlbum();
-#@results = $search->byArtistAlbum();
