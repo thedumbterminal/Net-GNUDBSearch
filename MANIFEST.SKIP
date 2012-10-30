@@ -67,3 +67,13 @@
 
 # Avoid archives of this distribution
 \bNet-GNUDBSearch-[\d\.\_]+
+
+#avoid eclipse project files
+.project
+.includepath
+.settings
+
+#avoid own docs
+how_to_release.txt
+^MYMETA.yml$
+
