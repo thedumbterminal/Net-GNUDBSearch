@@ -31,6 +31,16 @@ use XML::Simple;
 use Net::GNUDBSearch::Cd;
 our $VERSION = "1.0";
 #########################################################
+
+=head2 new()
+
+	my $gnudb = Net::GNUDBSearch->new();
+
+Constructor, returns a new instance of the search object ready for use.
+
+=cut
+
+#########################################################
 sub new{
 	my $class = shift;
 	my $self = {
@@ -40,6 +50,16 @@ sub new{
 	bless $self, $class;
 	return $self;
 }
+##########################################################
+
+=head2 byArtist($query)
+
+	my $albums = $gnudb->byArtist("The Prodigy");
+
+Returns an array reference of L<Net::GNUDBSearch::Cd> objects containing CD's found from the artist name given.
+
+=cut
+
 ##########################################################
 sub byArtist{
 	my($self, $query) = @_;

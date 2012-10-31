@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use Data::Dumper;
+#use Data::Dumper;
 use lib qw(lib ../lib);
 use Net::GNUDBSearch::Cd;
 plan(tests => 6);
