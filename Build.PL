@@ -7,15 +7,15 @@ my $build = Module::Build->new(
 	dist_author => 'MacGyveR <dumb@cpan.org>',
 	dist_abstract => 'Search interface to GNUDB database',
 	requires => {
-		'WWW::Mechanize' => undef,
-		'URI::Encode' => undef,
-		'XML::Simple' => undef,
-		'Data::Dumper' => undef,
-		'Carp' => undef,
-		'Net::FreeDB2' => undef
+		'WWW::Mechanize' => 0,
+		'URI::Encode' => 0,
+		'XML::Simple' => 0,
+		'Data::Dumper' => 0,
+		'Carp' => 0,
+		'Net::FreeDB2' => 0
 	},
 	build_requires => {
-		"Test::More" => ""
+		"Test::More" => 0
 	},
 	create_makefile_pl => 'traditional'
 );
