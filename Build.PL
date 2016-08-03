@@ -17,6 +17,11 @@ my $build = Module::Build->new(
 	build_requires => {
 		"Test::More" => 0
 	},
-	create_makefile_pl => 'traditional'
+	create_makefile_pl => 'traditional',
+	meta_merge => {
+		resources => {
+			repository => 'https://github.com/thedumbterminal/Net-GNUDBSearch'
+		}
+	}
 );
 $build->create_build_script;

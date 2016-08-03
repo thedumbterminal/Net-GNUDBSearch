@@ -29,7 +29,7 @@ use URI::Encode;
 use Data::Dumper;
 use XML::Simple;
 use Net::GNUDBSearch::Cd;
-our $VERSION = "1.0";
+our $VERSION = "1.01";
 #########################################################
 
 =head2 new()
